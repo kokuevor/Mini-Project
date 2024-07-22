@@ -1,0 +1,23 @@
+.section-header {
+    padding-top: 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.features-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.features-section {
+    align-self: stretch;
+    padding-top: 24px;
+    padding-right: 41px;
+    padding-left: 41px;
+    padding-bottom: 24px;
+    column-gap: 5%;
+    font-weight: 500;
+    color: rgba(249, 250, 252, 1);
+}

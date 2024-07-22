@@ -1,0 +1,35 @@
+.about-section-t-midbar {
+    flex-shrink: 0;
+    padding-top: 0px;
+    height: 100%;
+    align-self: stretch;
+}
+
+.about-section-bg {
+    flex-direction: column;
+    background-color: rgba(25, 26, 62, 1);;
+}
+
+.about-section-t-image {
+    flex-shrink: 0;
+    align-items: flex-end;
+}
+
+.about-section-image {
+    flex-shrink: 0;
+    height: 40%;
+    width: 40%;
+    object-position: center;
+    object-fit: cover;
+}
+
+.about-text {
+    flex-shrink: 0;
+    height: 100%;
+    padding-bottom: 120px;
+    padding-left: 15%;
+    padding-right: 15%;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 1);
+}

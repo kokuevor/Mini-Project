@@ -1,0 +1,39 @@
+.hero-section {
+    flex-shrink: 0;
+    height: 100%;
+    flex-direction: column;
+    row-gap: 20px;
+    background-color: rgba(255, 255, 255, 1);
+    align-items: center;
+    overflow: clip;
+    font-family: Inter;
+    line-height: normal;
+    letter-spacing: 0em;
+}
+
+.logo-name {
+    align-self: stretch;
+    padding-top: 85px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 48px;
+}
+
+.logo-name-text {
+    color: rgba(25, 26, 62, 1);
+}
+
+.logo-name-text-1 {
+    color: rgba(255, 122, 85, 1);
+}
+
+.tagline {
+    text-align: center;
+    font-size: 16px;
+    padding: 0px 25px;
+}
+
+.get-started-btn {
+    padding-top: 30px;
+    padding-bottom: 100pt;
+}
