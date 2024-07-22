@@ -16,7 +16,7 @@ export function NavbarComponent() {
 					<Nav.Link href="#contact">Contact</Nav.Link>
 				</Nav>
 				<Form className="d-flex">
-					<Button href="#" variant="primary"><b>Get Started</b></Button>
+					<Button href="/get-started" variant="primary"><b>Get Started</b></Button>
 				</Form>
 			</Container>
 		</Navbar>

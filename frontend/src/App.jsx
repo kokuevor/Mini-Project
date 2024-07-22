@@ -1,5 +1,6 @@
 import './App.css'
-// import LandingPage from './pages/LandingPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
 import LoginSignupPage from './pages/LoginSignupPage';
 
 
@@ -7,10 +8,12 @@ import LoginSignupPage from './pages/LoginSignupPage';
 function App() {
 
   return (
-    <div>
-      {/* <LandingPage /> */}
-      <LoginSignupPage />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/get-started" element={<LoginSignupPage />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

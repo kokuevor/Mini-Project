@@ -1,0 +1,147 @@
+.login-page {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.get-started {
+    flex: 1;
+    max-width: 500px;
+    padding-right: 50px;
+}
+
+.get-started h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.get-started p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.login-form {
+    flex: 1;
+    max-width: 400px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    color: #6c63ff;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.create-account {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.create-account a {
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        padding: 30px 20px;
+    }
+
+    .get-started {
+        max-width: 100%;
+        padding-right: 0;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .get-started h1 {
+        font-size: 28px;
+    }
+
+    .get-started p {
+        font-size: 16px;
+    }
+
+    .login-form {
+        padding: 30px;
+        width: 85%;
+    }
+}
+
+@media (max-width: 480px) {
+    .get-started h1 {
+        font-size: 24px;
+    }
+
+    .get-started p {
+        font-size: 14px;
+    }
+
+    .login-form {
+        padding: 30px;
+        max-width: 100%;
+    }
+
+    .login-form h2 {
+        font-size: 20px;
+    }
+
+    .form-group input {
+        padding: 8px;
+    }
+
+    .login-button {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
