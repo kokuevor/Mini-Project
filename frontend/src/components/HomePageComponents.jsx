@@ -33,7 +33,7 @@ ActionCard.propTypes = {
 // DateTimeCard Component
 const DateTimeCard = () => (
     <div className="date-time-card">
-        <h3>12:18 PM</h3>
+        <h2>12:18 PM</h2>
         <p>Monday, July 1, 2024</p>
         <FontAwesomeIcon icon={faCalendarAlt} className="calendar-icon" />
     </div>

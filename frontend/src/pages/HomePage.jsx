@@ -24,9 +24,9 @@ export default function HomePage() {
             <main className="main-content">
                 <Header />
                 <div className="action-cards">
+                    <DateTimeCard />
                     <ActionCard title="New Room" description="Create new study room" icon={<FontAwesomeIcon icon={faPlus} />} />
                     <ActionCard title="Join Room" description="via invitation code" icon={<FontAwesomeIcon icon={faArrowRight} />} />
-                    <DateTimeCard />
                 </div>
                 <section className="public-rooms">
                     <h2>Public Rooms</h2>
@@ -36,7 +36,7 @@ export default function HomePage() {
                             {subjects.map((subject, index) => (
                                 <SubjectTag key={index} name={subject} />
                             ))}
-                        <a href="#" className="see-all">See All</a>
+                            <a href="#" className="see-all">See All</a>
                         </div>
                     </div>
                     <div className="group-cards">

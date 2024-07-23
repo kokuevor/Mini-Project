@@ -3,3 +3,13 @@
   margin: 0 auto;
   /* padding: 5rem; */
 }
+
+input {
+  background-color: transparent;
+  color: black;
+}
+
+input:focus {
+  outline: none;
+  background-color: transparent;
+}

@@ -20,8 +20,10 @@ body {
     flex: 1;
     padding: 20px 40px;
     background-color: #f5f5f5;
+    /* background-color: #1e1e2d; */
     width: 80%;
     height: 100vh;
+    /* color: #f5f5f5; */
 }
 
 .header {
@@ -48,8 +50,8 @@ body {
 }
 
 .user-profile {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background-color: #1e1e2d;
     border-radius: 50%;
     display: flex;
@@ -79,6 +81,14 @@ body {
 .action-card {
     background-color: #1e1e2d;
     color: white;
+    width: 18%;
+    background-image: url("https://i.ibb.co/1MB17Pp/corner.png");
+    background-size: 70%;
+    background-position: top right;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .action-card .icon {
@@ -97,7 +107,35 @@ body {
 .date-time-card {
     background-color: #4caf50;
     color: white;
+    width: 30%;
+    position: absolute;
+    right: 25px;
+    background-image: url("https://images.unsplash.com/photo-1415604934674-561df9abf539?q=80&w=1380&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-size: 55%;
+    background-position: center right;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.date-time-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 50, 0, 0.9);
+    border-radius: 10px;
+}
+
+/* Ensure content is above the overlay */
+.date-time-card h2,
+.date-time-card p,
+.date-time-card .calendar-icon {
     position: relative;
+    z-index: 1;
 }
 
 .date-time-card h3 {
@@ -105,14 +143,16 @@ body {
 }
 
 .date-time-card p {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .date-time-card .calendar-icon {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    font-size: 24px;
+    padding-left: 5px;
+    font-size: 36px;
 }
 
 .public-rooms h2 {
@@ -151,7 +191,7 @@ body {
 
 .group-cards {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     overflow-x: auto;
     padding-bottom: 20px;
 }
@@ -181,4 +221,111 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+}
+
+
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+    .app {
+        flex-direction: column;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100vh;
+        width: 250px;
+        background-color: #1e1e2d;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .hamburger {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1001;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .user-profile {
+        align-self: flex-end;
+    }
+
+    .action-cards {
+        flex-direction: column;
+    }
+
+    .action-card {
+        width: 100%;
+    }
+
+    .date-time-card {
+        width: 100%;
+        position: relative;
+        right: 0px;
+    }
+
+    .group-cards {
+        flex-direction: column;
+    }
+
+    .group-card {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main-content {
+        padding: 10px;
+    }
+
+    .public-rooms h2 {
+        font-size: 20px;
+    }
+
+    .subjects h3 {
+        font-size: 16px;
+    }
+
+    .subject-tag {
+        font-size: 12px;
+    }
+
+    .see-all {
+        font-size: 14px;
+    }
+
+    .group-card h3 {
+        font-size: 18px;
+    }
+
+    .group-card p {
+        font-size: 12px;
+    }
+
+    .group-card button {
+        font-size: 14px;
+    }
 }
