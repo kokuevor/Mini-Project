@@ -1,0 +1,102 @@
+.hero-section {
+    flex-shrink: 0;
+    height: 100%;
+    flex-direction: column;
+    row-gap: 20px;
+    background-color: rgba(255, 255, 255, 1);
+    align-items: center;
+    overflow: clip;
+    font-family: Inter;
+    line-height: normal;
+    letter-spacing: 0em;
+}
+
+.logo-name {
+    align-self: stretch;
+    padding-top: 85px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 48px;
+}
+
+.logo-name-text {
+    color: rgba(25, 26, 62, 1);
+}
+
+.logo-name-text-1 {
+    color: rgba(255, 122, 85, 1);
+}
+
+.tagline {
+    text-align: center;
+    font-size: 16px;
+    padding: 0px 25px;
+}
+
+.get-started-btn {
+    padding-top: 30px;
+    padding-bottom: 100pt;
+    text-align: center;
+}
+
+.about-section-t-midbar {
+    flex-shrink: 0;
+    padding-top: 0px;
+    height: 100%;
+    align-self: stretch;
+}
+
+.about-section-bg {
+    flex-direction: column;
+    background-color: rgba(25, 26, 62, 1);
+    ;
+}
+
+.about-section-t-image {
+    flex-shrink: 0;
+    align-items: flex-end;
+    text-align: center;
+}
+
+.about-section-image {
+    flex-shrink: 0;
+    height: 40%;
+    width: 40%;
+    object-position: center;
+    object-fit: cover;
+}
+
+.about-text {
+    flex-shrink: 0;
+    height: 100%;
+    padding-bottom: 120px;
+    padding-left: 15%;
+    padding-right: 15%;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 1);
+}
+
+.section-header {
+    padding-top: 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.features-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.features-section {
+    align-self: stretch;
+    padding-top: 24px;
+    padding-right: 41px;
+    padding-left: 41px;
+    padding-bottom: 24px;
+    column-gap: 5%;
+    font-weight: 500;
+    color: rgba(249, 250, 252, 1);
+}

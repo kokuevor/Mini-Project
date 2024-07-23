@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export function Signup() {
     return (
         <div className="login-form">
@@ -19,7 +21,7 @@ export function Signup() {
                 <button type="submit" className="login-button">Login</button>
             </form>
             <p className="create-account">
-                Already have an account? <a href="/">Login</a>
+                Already have an account? <Link to="/get-started/login">Login</Link>
             </p>
         </div>
     )

@@ -1,7 +1,5 @@
 import { NavbarComponent } from '../components/Navbar';
-import { HeroComponent } from '../components/Hero';
-import { MainContentComponent } from '../components/MainContent'
-import { FeaturesComponent } from '../components/Features';
+import { HeroComponent, MainContentComponent, FeaturesComponent } from '../components/LandingPageComponents';
 import { ContactFormComponent } from '../components/Contact';
 import { Footer } from '../components/Footer';
 

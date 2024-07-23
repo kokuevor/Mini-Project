@@ -2,7 +2,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import LoginSignupPage from './pages/LoginSignupPage';
-
+import HomePage from './pages/HomePage';
 
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/get-started" element={<LoginSignupPage />}></Route>
+        <Route path="/home" element={<HomePage />}></Route>
       </Routes>
     </BrowserRouter>
   );

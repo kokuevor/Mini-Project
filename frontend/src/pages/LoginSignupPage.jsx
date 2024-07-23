@@ -1,12 +1,11 @@
 import './styles/LoginSignupPage.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Login } from '../components/Login';
-import { Signup } from '../components/Signup';
-
 import { NavbarComponent } from '../components/Navbar';
-import './styles/LoginSignupPage.css'; // Make sure to create this CSS file
+// import { Route, Routes, Navigate } from "react-router-dom";
+import { Login } from '../components/Login';
+// import { Signup } from '../components/Signup';
+import './styles/LoginSignupPage.css';
 
-const LoginSignupPage = () => {
+export default function LoginSignupPage() {
     return (
         <div className="login-page">
             <NavbarComponent />
@@ -18,15 +17,10 @@ const LoginSignupPage = () => {
                         experiences by logging in now. We value your presence and can&apos;t wait to offer you a seamless journey.
                     </p>
                 </div>
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/" element={<Login />}></Route>
-                        <Route path="/signup" element={<Signup />}></Route>
-                    </Routes>
-                </BrowserRouter>
+                <Login />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default LoginSignupPage;
+
