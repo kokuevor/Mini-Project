@@ -1,11 +1,11 @@
-import './styles/LoginSignupPage.css'
+import './styles/GetStartedPage.css'
 import { NavbarComponent } from '../components/Navbar';
 // import { Route, Routes, Navigate } from "react-router-dom";
 import { Login } from '../components/Login';
 // import { Signup } from '../components/Signup';
-import './styles/LoginSignupPage.css';
+import './styles/GetStartedPage.css';
 
-export default function LoginSignupPage() {
+export default function GetStartedPage() {
     return (
         <div className="login-page">
             <NavbarComponent />

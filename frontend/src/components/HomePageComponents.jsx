@@ -16,8 +16,8 @@ const Header = () => (
 );
 
 // ActionCard Component
-const ActionCard = ({ title, description, icon }) => (
-    <div className="action-card">
+const ActionCard = ({ title, description, icon, onClick }) => (
+    <div className="action-card" onClick={onClick} style={{ cursor: 'pointer' }}>
         <div className="icon">{icon}</div>
         <h3>{title}</h3>
         <p>{description}</p>
@@ -28,6 +28,7 @@ ActionCard.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     icon: PropTypes.element.isRequired,
+    onClick: PropTypes.func,
 };
 
 // DateTimeCard Component

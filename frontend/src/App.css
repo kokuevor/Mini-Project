@@ -4,12 +4,16 @@
   /* padding: 5rem; */
 }
 
-input {
+input,
+textarea,
+select {
   background-color: transparent;
   color: black;
 }
 
-input:focus {
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
   background-color: transparent;
 }

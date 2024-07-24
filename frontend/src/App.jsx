@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import LoginSignupPage from './pages/LoginSignupPage';
+import GetStartedPage from './pages/GetStartedPage';
 import HomePage from './pages/HomePage';
 
 
@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
-        <Route path="/get-started" element={<LoginSignupPage />}></Route>
+        <Route path="/get-started" element={<GetStartedPage />}></Route>
         <Route path="/home" element={<HomePage />}></Route>
       </Routes>
     </BrowserRouter>

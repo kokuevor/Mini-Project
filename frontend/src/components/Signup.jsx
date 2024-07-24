@@ -7,15 +7,15 @@ export function Signup() {
             <form>
                 <div className="form-group">
                     <label htmlFor="fullname">Fullname</label>
-                    <input type="fullname" id="fullname" placeholder="Enter fullname" />
+                    <input type="fullname" id="fullname" name="fullname" placeholder="Enter fullname" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter email" />
+                    <input type="email" id="email" name="email" placeholder="Enter email" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter password" />
+                    <input type="password" id="password" name="password" placeholder="Enter password" />
                     <a href="#" className="forgot-password">Forgot your password?</a>
                 </div>
                 <button type="submit" className="login-button">Login</button>
