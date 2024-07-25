@@ -1,0 +1,127 @@
+.public-rooms h2 {
+    padding-top: 10px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.private-rooms h2 {
+    padding-top: 10px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.emoji-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+hr.new-hr {
+    margin: 30px 0 0 0;
+    border: 3px solid #1e1e2d;
+    border-radius: 5px;
+    opacity: .05;
+}
+
+hr.new-hr2 {
+    margin: 5px 0 0 0;
+    border: 0.5px solid #1e1e2d;
+    border-radius: 5px;
+    opacity: .5;
+}
+
+.emoji-tag {
+    padding: 5px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.see-all-section {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.see-all {
+    color: #1e1e2d;
+    font-size: 16px;
+    float: right;
+    margin-top: 10px;
+}
+
+/* .group-cards {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    flex: 1;
+} */
+
+.group-cards-new {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
+.group-card {
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 250px;
+    color: white;
+}
+
+.group-card h3 {
+    margin-bottom: 10px;
+}
+
+.group-card p {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.group-card button {
+    background-color: #1e1e2d;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.group-card.private {
+    background-color: #1e1e2d;
+}
+
+.group-card.private button {
+    background-color: #ff7f50;
+
+}
+
+.group-card.public {
+    background-color: #ff7f50;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 480px)
+/*@media screen and (max-width: 768px)*/ {
+    /* .group-cards {
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding-bottom: 20px;
+        flex: 1;
+    } */
+
+    .group-cards-new {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 20px;
+    }
+}

@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Header, ActionCard, DateTimeCard, SubjectTag, GroupCard } from '../components/HomePageComponents';
+import { ActionCard, DateTimeCard, SubjectTag, GroupCard } from '../components/HomePageComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import './styles/Base.css'
 import './styles/HomePage.css'
 import Sidebar from '../components/Sidebar'
 import { NewRoomModal, JoinRoomModal } from '../components/Modal';
+import Header from '../components/Header';
 
 
 export default function HomePage() {
@@ -41,26 +43,28 @@ export default function HomePage() {
 
     return (
         <div className="app">
-            <Sidebar />
+            <Sidebar activeItem='home' />
             <main className="main-content">
                 <Header />
                 <NewRoomModal show={modalState.newRoom} handleClose={handleCloseModal} />
                 <JoinRoomModal show={modalState.joinRoom} handleClose={handleCloseModal} />
 
                 <div className="action-cards">
+                    <div className="action-cards-rooms">
+                        <ActionCard
+                            title="New Room"
+                            description="Create new study room"
+                            icon={<FontAwesomeIcon icon={faPlus} />}
+                            onClick={() => handleOpenModal('newRoom')}
+                        />
+                        <ActionCard
+                            title="Join Room"
+                            description="via invitation code"
+                            icon={<FontAwesomeIcon icon={faArrowRight} />}
+                            onClick={() => handleOpenModal('joinRoom')}
+                        />
+                    </div>
                     <DateTimeCard />
-                    <ActionCard
-                        title="New Room"
-                        description="Create new study room"
-                        icon={<FontAwesomeIcon icon={faPlus} />}
-                        onClick={() => handleOpenModal('newRoom')}
-                    />
-                    <ActionCard
-                        title="Join Room"
-                        description="via invitation code"
-                        icon={<FontAwesomeIcon icon={faArrowRight} />}
-                        onClick={() => handleOpenModal('joinRoom')}
-                    />
                 </div>
 
                 <section className="public-rooms">
@@ -75,9 +79,11 @@ export default function HomePage() {
                         </div>
                     </div>
                     <div className="group-cards">
-                        {groups.map((group, index) => (
-                            <GroupCard key={index} name={group.name} description={group.description} />
-                        ))}
+                        <div className='group-cards-new'>
+                            {groups.map((group, index) => (
+                                <GroupCard key={index} name={group.name} description={group.description} />
+                            ))}
+                        </div>
                     </div>
                 </section>
             </main>

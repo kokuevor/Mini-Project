@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #f5f5f5;
+    height: 100%;
+    margin: 0;
+}
+
+.app {
+    height: 100vh;
+    display: flex;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px 40px;
+    background-color: #f5f5f5;
+    width: 80%;
+    height: 100vh;
+
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    width: 300px;
+}
+
+.search-bar input {
+    border: none;
+    margin-left: 10px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.user-profile {
+    width: 50px;
+    height: 50px;
+    background-color: #1e1e2d;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .app {
+        flex-direction: column;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100vh;
+        width: 250px;
+        background-color: #1e1e2d;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .hamburger {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1001;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px;
+        margin-bottom: 60px;
+        z-index: 1;
+    }
+
+    .search-bar {
+        width: 80%;
+        margin-bottom: 10px;
+        position: absolute;
+    }
+    
+    .user-profile {
+        position: absolute;
+        align-self: flex-end;
+    }
+
+    .group-cards {
+        flex-direction: column;
+    }
+
+    .group-card {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main-content {
+        padding: 10px;
+    }
+
+    .public-rooms h2,
+    .private-rooms h2 {
+        font-size: 20px;
+    }
+
+    .see-all {
+        font-size: 14px;
+    }
+
+    .group-card h3 {
+        font-size: 18px;
+    }
+
+    .group-card p {
+        font-size: 12px;
+    }
+}

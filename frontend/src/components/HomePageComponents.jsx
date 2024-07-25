@@ -1,19 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faUser, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-
-// Header Component
-const Header = () => (
-    <header className="header">
-        <div className="search-bar">
-            <FontAwesomeIcon icon={faSearch} />
-            <input type="text" placeholder="Search" />
-        </div>
-        <div className="user-profile">
-            <FontAwesomeIcon icon={faUser} />
-        </div>
-    </header>
-);
 
 // ActionCard Component
 const ActionCard = ({ title, description, icon, onClick }) => (
@@ -52,9 +39,9 @@ SubjectTag.propTypes = {
 // GroupCard Component
 const GroupCard = ({ name, description }) => (
     <div className="group-card">
-        <h3>{name}</h3>
-        <p>{description}</p>
-        <button>Join</button>
+            <h3>{name}</h3>
+            <p>{description}</p>
+            <button>Join</button>
     </div>
 );
 
@@ -63,4 +50,4 @@ GroupCard.propTypes = {
     description: PropTypes.string.isRequired,
 };
 
-export { Header, ActionCard, DateTimeCard, SubjectTag, GroupCard };
+export { ActionCard, DateTimeCard, SubjectTag, GroupCard };

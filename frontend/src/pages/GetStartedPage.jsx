@@ -1,11 +1,18 @@
 import './styles/GetStartedPage.css'
 import { NavbarComponent } from '../components/Navbar';
 // import { Route, Routes, Navigate } from "react-router-dom";
-import { Login } from '../components/Login';
+import { Login, Signup } from '../components/Forms';
 // import { Signup } from '../components/Signup';
+import { useState } from 'react';
 import './styles/GetStartedPage.css';
 
 export default function GetStartedPage() {
+    const [activeComponent, setActiveComponent] = useState('login');
+
+    const handleClick = (component) => {
+        setActiveComponent(component);
+    };
+
     return (
         <div className="login-page">
             <NavbarComponent />
@@ -17,7 +24,9 @@ export default function GetStartedPage() {
                         experiences by logging in now. We value your presence and can&apos;t wait to offer you a seamless journey.
                     </p>
                 </div>
-                <Login />
+                {/* <Login /> */}
+                {activeComponent === 'login' && <Login handleClick={handleClick} />}
+                {activeComponent === 'signup' && <Signup handleClick={handleClick} />}
             </div>
         </div>
     )
