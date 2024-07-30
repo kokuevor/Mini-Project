@@ -18,11 +18,18 @@ ActionCard.propTypes = {
     onClick: PropTypes.func,
 };
 
+const currentDate = new Date();
+const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true }
+
+const formattedCurrentDate = currentDate.toLocaleDateString('en-US', dateOptions);
+const formattedCurrentTime = currentDate.toLocaleTimeString('en-US', timeOptions);
+
 // DateTimeCard Component
 const DateTimeCard = () => (
     <div className="date-time-card">
-        <h2>12:18 PM</h2>
-        <p>Monday, July 1, 2024</p>
+        <h2>{formattedCurrentTime}</h2>
+        <p>{formattedCurrentDate}</p>
         <FontAwesomeIcon icon={faCalendarAlt} className="calendar-icon" />
     </div>
 );

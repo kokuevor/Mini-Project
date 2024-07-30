@@ -1,0 +1,77 @@
+a) User Registration:
+   Method: POST
+   URL: http://localhost:5000/auth/register
+{
+    "username": "testuser",
+    "email": "testuser@example.com",
+    "password": "password123"
+}
+
+b) User Login:
+   Method: POST
+   URL: http://localhost:5000/auth/login
+{
+    "email": "testuser@example.com",
+    "password": "password123"
+}
+
+c) Create Group:
+   Method: POST
+   URL: http://localhost:5000/groups
+{
+    "name": "Study Group 1",
+    "description": "A group for studying Flask",
+    "is_private": false,
+    "admin_id": 1
+}
+
+d) Join Group:
+   Method: POST
+   URL: http://localhost:5000/groups/1/join
+{
+    "user_id": 2
+}
+
+
+e) Send Message:
+   Method: POST
+   URL: http://localhost:5000/groups/1/messages
+{
+    "user_id": 1,
+    "content": "Hello, everyone!"
+}
+
+f) Create Task:
+   Method: POST
+   URL: http://localhost:5000/groups/1/tasks
+{
+    "title": "Complete Flask Tutorial",
+    "description": "Finish the Flask tutorial by next week",
+    "due_date": "2023-07-31T23:59:59"
+}
+
+g) Create Event:
+   Method: POST
+   URL: http://localhost:5000/groups/1/events
+{
+    "title": "Group Study Session",
+    "description": "Online study session for midterms",
+    "event_date": "2023-07-25T18:00:00"
+}
+
+h) Upload File:
+   Method: POST
+   URL: http://localhost:5000/groups/1/files
+
+Body (form-data):
+Key: file, Value: [Select a file]
+Key: user_id, Value: 1
+
+i) Log Call:
+   Method: POST
+   URL: http://localhost:5000/groups/1/calls
+{
+    "user_id": 1,
+    "call_type": "video",
+    "start_time": "2023-07-20T14:30:00"
+}

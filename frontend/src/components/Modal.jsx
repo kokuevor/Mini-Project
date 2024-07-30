@@ -40,7 +40,7 @@ const JoinRoomModal = ({ show, handleClose }) => {
                         <label htmlFor="inviteCode">Invite code</label>
                         <input type="text" id="inviteCode" name="inviteCode" required placeholder="Enter invite code" />
                     </div>
-                    <button type="submit" className="create-button">Create Room</button>
+                    <button type="submit" className="create-button">Join Room</button>
                     <button type="button" className="cancel-button" onClick={handleClose}>Cancel</button>
                 </form>
             </div>

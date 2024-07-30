@@ -10,13 +10,17 @@ EmojiTag.propTypes = {
     name: PropTypes.string.isRequired,
 };
 
-export const RoomCard = ({ title, type }) => (
-    <div className={`group-card ${type.toLowerCase()}`}>
+export const RoomCard = ({ title, type, onClick }) => (
+    <div className={`group-card ${type.toLowerCase()}`} onClick={onClick} style={{ cursor: 'pointer' }}>
         <h3>{title}</h3>
         <p>{type.charAt(0).toUpperCase() + type.slice(1)} Room</p>
         <EmojiTag name='🔐🔓' />
     </div>
 );
+
+const goToRoom = (url) => {
+    window.location.href = url;
+};
 
 export const RoomSection = ({ title, type, rooms }) => (
     <section className={`${type.toLowerCase()}-rooms`}>
@@ -30,7 +34,12 @@ export const RoomSection = ({ title, type, rooms }) => (
         <div className="group-cards">
             <div className='group-cards-new'>
                 {rooms.map((room, index) => (
-                    <RoomCard key={index} title={room.title} type={type} />
+                    <RoomCard
+                        key={index}
+                        title={room.title}
+                        type={type}
+                        onClick={() => goToRoom('/room')}
+                    />
                 ))}
             </div>
         </div>
@@ -40,6 +49,7 @@ export const RoomSection = ({ title, type, rooms }) => (
 RoomCard.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
 }
 
 RoomSection.propTypes = {
