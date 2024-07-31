@@ -1,4 +1,4 @@
-from app import db
+from create_app import db
 from datetime import datetime
 
 
@@ -15,26 +15,28 @@ class Group(db.Model):
     name = db.Column(db.String(100), unique=True, nullable=False)
     description = db.Column(db.String(255), nullable=False)
     is_private = db.Column(db.Boolean, default=False)
-    admin_id = db.Column(db.Integer, db.ForeignKey("user_id"))
+    admin_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    admin = db.relationship("User", backref="administered_groups")
 
 
 class UserGroup(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey("user_id"), primary_key=True)
-    group_id = db.Column(db.Integer, db.ForeignKey("group_id"), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    group_id = db.Column(db.Integer, db.ForeignKey("group.id"), primary_key=True)
     joined_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    group_id = db.Column(db.Integer, db.ForeignKey("group_id"), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user_id"), nullable=False)
+    group_id = db.Column(db.Integer, db.ForeignKey("group.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     content = db.Column(db.Text, nullable=False)
     sent_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    group_id = db.Column(db.Integer, db.ForeignKey("group_id"), nullable=False)
+    group_id = db.Column(db.Integer, db.ForeignKey("group.id"), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
     due_date = db.Column(db.DateTime)
@@ -43,7 +45,7 @@ class Task(db.Model):
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    group_id = db.Column(db.Integer, db.ForeignKey("group_id"), nullable=False)
+    group_id = db.Column(db.Integer, db.ForeignKey("group.id"), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
     event_date = db.Column(db.DateTime)
@@ -51,8 +53,8 @@ class Event(db.Model):
 
 class File(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    group_id = db.Column(db.Integer, db.ForeignKey("group_id"), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user_id"), nullable=False)
+    group_id = db.Column(db.Integer, db.ForeignKey("group.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     file_name = db.Column(db.String(255), nullable=False)
     file_path = db.Column(db.String(255), nullable=False)
     uploaded_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -60,8 +62,8 @@ class File(db.Model):
 
 class CallLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    group_id = db.Column(db.Integer, db.ForeignKey("group_id"), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user_id"), nullable=False)
+    group_id = db.Column(db.Integer, db.ForeignKey("group.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     call_type = db.Column(db.String(20), nullable=False)
     start_time = db.Column(db.DateTime, nullable=False)
     end_time = db.Column(db.DateTime)
