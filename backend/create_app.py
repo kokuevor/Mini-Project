@@ -11,7 +11,7 @@ def create_app():
     db.init_app(app)
 
     with app.app_context():
-        from models.models import User, Group, Message, Task, Event, File, CallLog
+        from models.models import User, Group, UserGroup, Message, Task, Event, File, CallLog
         from routes import auth, groups, messages, tasks, events, files, calls
 
         app.register_blueprint(auth.bp)

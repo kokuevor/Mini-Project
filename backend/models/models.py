@@ -25,6 +25,9 @@ class UserGroup(db.Model):
     group_id = db.Column(db.Integer, db.ForeignKey("group.id"), primary_key=True)
     joined_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    user = db.relationship("User", backref="user_groups")
+    group = db.relationship("Group", backref="user_groups")
+
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
