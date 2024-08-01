@@ -6,9 +6,7 @@ import HomePage from './pages/HomePage';
 import MyRoomsPage from './pages/MyRoomsPage';
 import Room from './pages/Room';
 
-
-function App() {
-
+function App() {  
   return (
     <BrowserRouter>
       <Routes>

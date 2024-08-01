@@ -70,3 +70,10 @@ class CallLog(db.Model):
     call_type = db.Column(db.String(20), nullable=False)
     start_time = db.Column(db.DateTime, nullable=False)
     end_time = db.Column(db.DateTime)
+
+
+class Invitations(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    group_id = db.Column(db.Integer, db.ForeignKey("group.id"), primary_key=True)
+    invitation_code = db.Column(db.String(8), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)

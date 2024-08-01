@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ActionCard, DateTimeCard, SubjectTag, GroupCard } from '../components/HomePageComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -7,20 +7,35 @@ import './styles/HomePage.css'
 import Sidebar from '../components/Sidebar'
 import { NewRoomModal, JoinRoomModal } from '../components/Modal';
 import Header from '../components/Header';
+import { api } from '../utils/api';
 
 
 export default function HomePage() {
     const subjects = ['Math', 'Science', 'History', 'English', 'Art', 'Music', 'Physics', 'Chemistry', 'Biology'];
-    const groups = [
-        { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
-        { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
-        { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
-        { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
-        { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
-        { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
-        { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
-        { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
-    ];
+    // const groups = [
+    //     { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
+    //     { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
+    //     { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
+    //     { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
+    //     { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
+    //     { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
+    //     { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
+    //     { name: 'Group Name', description: 'Lorem ipsum dolor sit amet consect adipiscing elit. Maxime mollitia, iae quas vel sint commodi repudiandae.' },
+    // ];
+
+    const [groups, setGroups] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        api.get_groups()
+            .then(response => {
+                setGroups(response.data);
+            })
+            .catch(error => {
+                setError(error.response?.data?.message || 'Unable to load groups');
+            });
+    }, []);
+
 
     const [modalState, setModalState] = useState({
         newRoom: false,
@@ -83,6 +98,7 @@ export default function HomePage() {
                             {groups.map((group, index) => (
                                 <GroupCard key={index} name={group.name} description={group.description} />
                             ))}
+                            {error && <h3 className="error-message">{error}</h3>}
                         </div>
                     </div>
                 </section>

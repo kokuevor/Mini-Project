@@ -11,7 +11,8 @@ def create_app():
     app.config.from_object(Config)
     db.init_app(app)
 
-    CORS(app)
+    # CORS(app)
+    CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 
     with app.app_context():
         from models.models import (
@@ -23,6 +24,7 @@ def create_app():
             Event,
             File,
             CallLog,
+            Invitations,
         )
         from routes import auth, groups, messages, tasks, events, files, calls
 

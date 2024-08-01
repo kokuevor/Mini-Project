@@ -1,7 +1,10 @@
 from flask import Blueprint, request, jsonify
-from models.models import User, Group, UserGroup
+from models.models import User, Group, UserGroup, Invitations
 from create_app import db
 from sqlalchemy.exc import IntegrityError
+
+import string
+import random
 
 bp = Blueprint("groups", __name__, url_prefix="/api/groups")
 
@@ -33,21 +36,78 @@ def create_group():
         return jsonify({"message": f"An error occurred: {str(e)}"}), 500
 
 
-@bp.route("/<int:group_id>/join", methods=["POST"])
-def join_group(group_id):
+@bp.route("/<int:group_id>/invite", methods=["POST"])
+def invite(group_id):
+    characters = string.ascii_letters + string.digits
+    invite_code = "".join(random.choice(characters) for _ in range(6))
+
     data = request.json
     user_id = data["user_id"]
 
-    # if not user_id:
-    #     return jsonify({"message": "User ID is required"}), 400
+    try:
+        group = Group.query.filter_by(id=group_id).first()
+        if group is None:
+            return jsonify({"message": "Group not found"}), 404
 
-    user = User.query.get(user_id)
+        invitation = Invitations(
+            user_id=user_id, group_id=group_id, invitation_code=invite_code
+        )
+
+        db.session.add(invitation)
+        db.session.commit()
+
+        return (
+            jsonify([{"group_name": group.name, "invite_code": invite_code}]),
+            200,
+        )
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": f"An error occurred: {str(e)}"}), 500
+
+
+@bp.route("/<int:group_id>/join", methods=["POST"])
+def join_group(group_id):
+    data = request.json
     group = Group.query.get(group_id)
+
+    user_id = data["user_id"]
+    user = User.query.get(user_id)
 
     if not user:
         return jsonify({"message": "User not found"}), 404
     if not group:
         return jsonify({"message": "Group not found"}), 404
+
+    try:
+        new_member = UserGroup(user_id=user_id, group_id=group_id)
+        db.session.add(new_member)
+        db.session.commit()
+        return jsonify({"message": "Joined group successfully"}), 200
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({"message": "User already in the group"}), 400
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": f"An error occurred: {str(e)}"}), 500
+
+
+@bp.route("/join", methods=["POST"])
+def join_group_with_invite():
+    data = request.json
+    user_id = data["user_id"]
+    invite_code = data["invite_code"]
+
+    invitation = Invitations.query.filter_by(invitation_code=invite_code).first()
+
+    group_id = invitation.group_id
+    group = Group.query.filter_by(id=group_id).first()
+    user = User.query.get(user_id)
+
+    if not user:
+        return jsonify({"message": "User not found"}), 404
+
+    if invitation is None:
+        return jsonify({"message": "Invitation not found"}), 404
 
     try:
         new_member = UserGroup(user_id=user_id, group_id=group_id)
@@ -69,7 +129,12 @@ def get_all_groups():
         return (
             jsonify(
                 [
-                    {"name": group.name, "description": group.description}
+                    {
+                        "group_id": group.id,
+                        "name": group.name,
+                        "description": group.description,
+                        "admin_id": group.admin_id,
+                    }
                     for group in groups
                 ]
             ),
