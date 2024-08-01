@@ -3,7 +3,7 @@ from models.models import User, Group, UserGroup
 from create_app import db
 from sqlalchemy.exc import IntegrityError
 
-bp = Blueprint("groups", __name__, url_prefix="/groups")
+bp = Blueprint("groups", __name__, url_prefix="/api/groups")
 
 
 @bp.route("/", methods=["POST"])

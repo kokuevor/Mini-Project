@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from config import Config
 
 db = SQLAlchemy()
@@ -10,8 +11,19 @@ def create_app():
     app.config.from_object(Config)
     db.init_app(app)
 
+    CORS(app)
+
     with app.app_context():
-        from models.models import User, Group, UserGroup, Message, Task, Event, File, CallLog
+        from models.models import (
+            User,
+            Group,
+            UserGroup,
+            Message,
+            Task,
+            Event,
+            File,
+            CallLog,
+        )
         from routes import auth, groups, messages, tasks, events, files, calls
 
         app.register_blueprint(auth.bp)
@@ -19,7 +31,7 @@ def create_app():
         # app.register_blueprint(messages.bp)
         # app.register_blueprint(tasks.bp)
         # app.register_blueprint(events.bp)
-        # app.register_blueprint(files.bp)
+        app.register_blueprint(files.bp)
         # app.register_blueprint(calls.bp)
 
     return app
