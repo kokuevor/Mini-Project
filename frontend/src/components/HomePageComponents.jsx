@@ -1,6 +1,9 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+import { api } from '../utils/api';
 
 // ActionCard Component
 const ActionCard = ({ title, description, icon, onClick }) => (
@@ -18,21 +21,31 @@ ActionCard.propTypes = {
     onClick: PropTypes.func,
 };
 
-const currentDate = new Date();
-const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true }
+const DateTimeCard = () => {
+    const [currentDate, setCurrentDate] = useState(new Date());
 
-const formattedCurrentDate = currentDate.toLocaleDateString('en-US', dateOptions);
-const formattedCurrentTime = currentDate.toLocaleTimeString('en-US', timeOptions);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentDate(new Date());
+        }, 1000);
 
-// DateTimeCard Component
-const DateTimeCard = () => (
-    <div className="date-time-card">
-        <h2>{formattedCurrentTime}</h2>
-        <p>{formattedCurrentDate}</p>
-        <FontAwesomeIcon icon={faCalendarAlt} className="calendar-icon" />
-    </div>
-);
+        return () => clearInterval(interval); // Cleanup the interval on component unmount
+    }, []);
+
+    const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+
+    const formattedCurrentDate = currentDate.toLocaleDateString('en-US', dateOptions);
+    const formattedCurrentTime = currentDate.toLocaleTimeString('en-US', timeOptions);
+
+    return (
+        <div className="date-time-card">
+            <h2>{formattedCurrentTime}</h2>
+            <p>{formattedCurrentDate}</p>
+            <FontAwesomeIcon icon={faCalendarAlt} className="calendar-icon" />
+        </div>
+    );
+};
 
 // SubjectTag Component
 const SubjectTag = ({ name }) => (
@@ -44,15 +57,31 @@ SubjectTag.propTypes = {
 };
 
 // GroupCard Component
-const GroupCard = ({ name, description }) => (
-    <div className="group-card">
+const GroupCard = ({ name, description, group_id }) => {
+    const user_id = localStorage.getItem('user_id');
+    const navigate = useNavigate();
+
+    const joinGroup = async () => {
+        try {
+            const response = await api.join_group(group_id, { user_id: user_id });
+            alert(response.data.message);
+            navigate('/my-rooms');
+        } catch (err) {
+            alert(err.response?.data?.message || 'An error occurred');
+        }
+    };
+
+    return (
+        <div className="group-card">
             <h3>{name}</h3>
             <p>{description}</p>
-            <button>Join</button>
-    </div>
-);
+            <button onClick={joinGroup}>Join</button>
+        </div>
+    );
+};
 
 GroupCard.propTypes = {
+    group_id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
 };

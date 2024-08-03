@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-// Access the API base URL from environment variables
-// const API_BASE_URL = import.meta.env.API_BASE_URL;
 const API_BASE_URL = "http://localhost:5000/api";
-// console.log(API_BASE_URL);
 
 export const api = {
     // User registration
@@ -15,15 +12,24 @@ export const api = {
     // Get groups
     get_groups: () => axios.get(`${API_BASE_URL}/groups`),
 
+    // Get group by id
+    get_group_by_id: (groupId) => axios.get(`${API_BASE_URL}/groups/${groupId}`),
+
+    // Get user group
+    get_user_groups: (userId) => axios.get(`${API_BASE_URL}/groups/user/${userId}`),
+
+    // Leave group
+    leave_group: (userId, groupId) => axios.delete(`${API_BASE_URL}/groups/user/${userId}/group/${groupId}`),
+
     // Create group
     create_group: (data) => axios.post(`${API_BASE_URL}/groups/`, data),
 
     // Join group
     join_group: (groupId, data) => axios.post(`${API_BASE_URL}/groups/${groupId}/join`, data),
-    
+
     // Join group
     join_group_by_invite: (data) => axios.post(`${API_BASE_URL}/groups/join`, data),
-    
+
     // Send message
     send_message: (groupId, data) => axios.post(`${API_BASE_URL}/groups/${groupId}/messages`, data),
 
@@ -34,10 +40,18 @@ export const api = {
     create_event: (groupId, data) => axios.post(`${API_BASE_URL}/groups/${groupId}/events`, data),
 
     // Upload file
-    upload_file: (groupId, formData) => axios.post(`${API_BASE_URL}/groups/${groupId}/files`, formData, {
+    upload_file: (groupId, formData) => axios.post(`${API_BASE_URL}/groups/${groupId}/files/upload`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
+    }),
+
+    // Get files
+    get_files: (groupId, data) => axios.get(`${API_BASE_URL}/groups/${groupId}/files`, data),
+
+    // Download file
+    download_file: (groupId, fileName) => axios.get(`${API_BASE_URL}/groups/${groupId}/files/download/${fileName}`, {
+        responseType: 'blob'
     }),
 
     // Log call

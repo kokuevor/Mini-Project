@@ -29,7 +29,8 @@ export default function HomePage() {
     useEffect(() => {
         api.get_groups()
             .then(response => {
-                setGroups(response.data);
+                const filteredGroups = response.data.filter(group => !group.is_private);
+                setGroups(filteredGroups);
             })
             .catch(error => {
                 setError(error.response?.data?.message || 'Unable to load groups');
@@ -96,7 +97,7 @@ export default function HomePage() {
                     <div className="group-cards">
                         <div className='group-cards-new'>
                             {groups.map((group, index) => (
-                                <GroupCard key={index} name={group.name} description={group.description} />
+                                <GroupCard key={index} name={group.name} description={group.description} group_id={group.group_id} />
                             ))}
                             {error && <h3 className="error-message">{error}</h3>}
                         </div>

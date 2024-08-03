@@ -26,8 +26,9 @@ const NewRoomModal = ({ show, handleClose }) => {
 
             });
             console.log('Room created successfully', response.data);
-            // navigate('/home'); // Redirect to the home page or any other page
+            await api.join_group(response.data['group_id'], { user_id: user_id });
             handleClose()
+            window.location.reload();
         } catch (err) {
             setError(err.response?.data?.message || 'An error occurred');
         }
@@ -99,8 +100,8 @@ const JoinRoomModal = ({ show, handleClose }) => {
 
             });
             console.log('Group joined successfully', response.data);
-            // navigate('/home'); // Redirect to the home page or any other page
             handleClose()
+            window.location.reload();
         } catch (err) {
             setError(err.response?.data?.message || 'An error occurred');
         }

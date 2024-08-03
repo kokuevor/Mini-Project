@@ -1,6 +1,28 @@
+import PropTypes from 'prop-types';
+import { api } from '../utils/api';
 import './GroupInfo.css';
+import { useParams } from 'react-router-dom';
 
-function GroupInfo() {
+function GroupInfo({ members, files }) {
+
+  const { group_id } = useParams();
+
+  const handleDownload = (fileName) => {
+    api.download_file(group_id, fileName)
+      .then(response => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', fileName);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      })
+      .catch(error => {
+        console.error('Error downloading the file:', error);
+      });
+  };
+
 
   return (
     <div className="group-info-area">
@@ -18,10 +40,10 @@ function GroupInfo() {
           </div>
           <hr />
           <ul>
-            {Array(6).fill().map((_, index) => (
+            {files.map((file, index) => (
               <li key={index}>
-                <span>File1.jpg</span>
-                <button className="download-btn">Download</button>
+                <span>{file}</span>
+                <button className="download-btn" onClick={() => handleDownload(file)}>Download</button>
               </li>
             ))}
           </ul>
@@ -33,17 +55,11 @@ function GroupInfo() {
           </div>
           <hr />
           <ul>
-            {Array(2).fill().map((_, index) => (
+            {members.map((member, index) => (
               <li key={index}>
-                <div className="member-icon">M</div>
-                <span className="member-name">Member Name</span>
-                <span className="admin-tag">admin</span>
-              </li>
-            ))}
-            {Array(4).fill().map((_, index) => (
-              <li key={index}>
-                <div className="member-icon">M</div>
-                <span className="member-name">Member Name</span>
+                <div className="member-icon">{member.username[index].toUpperCase()}</div>
+                <span className="member-name">{member.username}</span>
+                {member.is_admin && <span className="admin-tag">admin</span>}
               </li>
             ))}
           </ul>
@@ -52,5 +68,17 @@ function GroupInfo() {
     </div>
   );
 }
+
+GroupInfo.propTypes = {
+  members: PropTypes.arrayOf(
+    PropTypes.shape({
+      user_id: PropTypes.number.isRequired,
+      username: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  files: PropTypes.arrayOf(
+    PropTypes.string
+  ).isRequired,
+};
 
 export default GroupInfo;

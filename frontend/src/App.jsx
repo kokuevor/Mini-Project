@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage';
 import MyRoomsPage from './pages/MyRoomsPage';
 import Room from './pages/Room';
 
-function App() {  
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -18,7 +18,7 @@ function App() {
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/logout" element={<LogoutPage />} /> */}
 
-        <Route path="/room" element={<Room />} />
+        <Route path="/group/:group_id/room" element={<Room />} />
       </Routes>
     </BrowserRouter>
   );
