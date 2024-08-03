@@ -30,7 +30,7 @@ def create_group():
         )
     except IntegrityError:
         db.session.rollback()
-        return jsonify({"message": "Group with the same name already exists"}), 400
+        return jsonify({"message": "Group with the same name already exists"})
     except Exception as e:
         db.session.rollback()
         return jsonify({"message": f"An error occurred: {str(e)}"}), 500
@@ -85,7 +85,7 @@ def join_group(group_id):
         return jsonify({"message": "Joined group successfully"}), 200
     except IntegrityError:
         db.session.rollback()
-        return jsonify({"message": "User already in the group"}), 400
+        return jsonify({"message": "User already in the group"})
     except Exception as e:
         db.session.rollback()
         return jsonify({"message": f"An error occurred: {str(e)}"}), 500
@@ -116,7 +116,7 @@ def join_group_with_invite():
         return jsonify({"message": "Joined group successfully"}), 200
     except IntegrityError:
         db.session.rollback()
-        return jsonify({"message": "User already in the group"}), 400
+        return jsonify({"message": "User already in the group"})
     except Exception as e:
         db.session.rollback()
         return jsonify({"message": f"An error occurred: {str(e)}"}), 500
@@ -134,6 +134,7 @@ def get_all_groups():
                         "name": group.name,
                         "description": group.description,
                         "admin_id": group.admin_id,
+                        "is_private": group.is_private,
                     }
                     for group in groups
                 ]
@@ -152,10 +153,97 @@ def get_group_by_id(group_id):
         if group is None:
             return jsonify({"message": "Group not found"}), 404
 
+        user_groups = UserGroup.query.filter_by(group_id=group_id).all()
+        user_ids = [user_group.user_id for user_group in user_groups]
+        users = {
+            user.id: user for user in User.query.filter(User.id.in_(user_ids)).all()
+        }
+        admin_id = Group.query.filter_by(id=group_id).first().admin_id
+
+        members = [
+            {
+                "user_id": user_group.user_id,
+                "username": (
+                    users.get(user_group.user_id).username
+                    if user_group.user_id in users
+                    else "Unknown"
+                ),
+                "is_admin": user_group.user_id == admin_id,
+            }
+            for user_group in user_groups
+        ]
+
         return (
-            jsonify([{"name": group.name, "description": group.description}]),
+            jsonify(
+                {
+                    "name": group.name,
+                    "description": group.description,
+                    "is_private": group.is_private,
+                    "members": members,
+                    "group_id": group.id,
+                }
+            ),
             200,
         )
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": f"An error occurred: {str(e)}"}), 500
+
+
+@bp.route("/user/<int:user_id>", methods=["GET"])
+def get_user_groups(user_id):
+    try:
+        user_groups = UserGroup.query.filter_by(user_id=user_id).all()
+
+        if not user_groups:
+            return jsonify({"message": "No groups found for this user"})
+
+        group_ids = [user_group.group_id for user_group in user_groups]
+
+        groups = Group.query.filter(Group.id.in_(group_ids)).all()
+
+        if not groups:
+            return jsonify({"message": "Groups not found"}), 404
+
+        result = [
+            {
+                "name": group.name,
+                "is_private": group.is_private,
+                "description": group.description,
+                "group_id": group.id,
+            }
+            for group in groups
+        ]
+
+        return jsonify(result), 200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": f"An error occurred: {str(e)}"}), 500
+
+
+@bp.route("/user/<int:user_id>/group/<int:group_id>", methods=["DELETE"])
+def leave_group(user_id, group_id):
+    try:
+        user_group = UserGroup.query.filter_by(
+            user_id=user_id, group_id=group_id
+        ).first()
+
+        if not user_group:
+            return jsonify({"message": "User is not a member of this group"}), 404
+
+        group = Group.query.filter_by(id=group_id).first()
+        if not group:
+            return jsonify({"message": "Group not found"}), 404
+
+        if user_id == group.admin_id:
+            return jsonify({"message": "Admin cannot leave the group"}), 403
+
+        db.session.delete(user_group)
+        db.session.commit()
+
+        return jsonify({"message": "User left the group successfully"}), 200
+
     except Exception as e:
         db.session.rollback()
         return jsonify({"message": f"An error occurred: {str(e)}"}), 500

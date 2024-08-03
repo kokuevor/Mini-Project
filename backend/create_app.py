@@ -2,7 +2,10 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from config import Config
+# import os
+# from dotenv import load_dotenv
 
+# load_dotenv()
 db = SQLAlchemy()
 
 
@@ -10,6 +13,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     db.init_app(app)
+    # app.secret_key = os.getenv("SECRET_KEY")
 
     # CORS(app)
     CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})

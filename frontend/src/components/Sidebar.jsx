@@ -8,8 +8,31 @@ import {
     faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from 'prop-types';
+import { api } from "../utils/api";
+import { useState } from "react";
 
 const Sidebar = ({ activeItem }) => {
+    const [error, setError] = useState(null);
+
+    const handleLogout = async () => {
+        try {
+            await api.logout();
+
+            sessionStorage.removeItem('user_id')
+            sessionStorage.removeItem('authToken')
+            console.log('Logout successful');
+            window.location.href = '/get-started';
+        } catch (err) {
+            setError(err.response?.data?.message || 'An error occurred');
+        }
+    };
+
+    const logoutPrompt = () => {
+        if (window.confirm("Do you really want to leave?")) {
+            handleLogout();
+        }
+    }
+
     return (
         <aside className="sidebar">
             <div className="logo">
@@ -34,10 +57,11 @@ const Sidebar = ({ activeItem }) => {
                     <span>Settings</span>
                 </a>
             </nav>
-            <a href="#" className="logout">
+            <a onClick={logoutPrompt} className="logout" style={{ cursor: 'pointer' }}>
                 <FontAwesomeIcon icon={faSignOutAlt} size="xl" />
                 <span>Logout</span>
             </a>
+            {error && alert({ error })}
         </aside>
     );
 };

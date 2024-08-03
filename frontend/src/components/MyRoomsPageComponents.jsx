@@ -95,7 +95,7 @@ const MainContent = () => {
     const [privateRooms, setPrivateRooms] = useState([]);
     const [error, setError] = useState(null);
 
-    const user_id = localStorage.getItem('user_id');
+    const user_id = sessionStorage.getItem('user_id');
 
     useEffect(() => {
         if (user_id) {
@@ -115,11 +115,9 @@ const MainContent = () => {
 
                     setPublicRooms(publicRooms);
                     setPrivateRooms(privateRooms);
-                    console.log(privateRooms)
-                    console.log(publicRooms)
                 })
                 .catch(error => {
-                    setError(error.response?.data?.message || 'No groups found');
+                    setError(error.response?.data?.message || 'No groups found for this user');
                 });
         }
     }, [user_id]);
@@ -127,7 +125,7 @@ const MainContent = () => {
 
     return (
         <>
-            {error && <h3 className="error-message">{error}</h3>}
+            {error && <center><h4 style={{ color: "red" }} className="error-message">{error}</h4></center>}
             <RoomSection title="My Rooms - Private" type="Private" rooms={privateRooms} />
             <hr className='new-hr' />
             <RoomSection title="My Rooms - Public" type="Public" rooms={publicRooms} />

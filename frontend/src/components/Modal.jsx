@@ -16,7 +16,7 @@ const NewRoomModal = ({ show, handleClose }) => {
         e.preventDefault(); // Prevent the default form submission
 
         try {
-            const user_id = localStorage.getItem('user_id');
+            const user_id = sessionStorage.getItem('user_id');
 
             const response = await api.create_group({
                 name: roomName,
@@ -92,7 +92,7 @@ const JoinRoomModal = ({ show, handleClose }) => {
         e.preventDefault(); // Prevent the default form submission
 
         try {
-            const user_id = localStorage.getItem('user_id');
+            const user_id = sessionStorage.getItem('user_id');
 
             const response = await api.join_group_by_invite({
                 invite_code: inviteCode,

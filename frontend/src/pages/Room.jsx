@@ -12,7 +12,7 @@ export default function Room() {
 
   const { group_id } = useParams();
 
-  const user_id = localStorage.getItem('user_id');
+  const user_id = sessionStorage.getItem('user_id');
   const [userGroups, setUserGroups] = useState([]);
   const [groupListError, setgroupListError] = useState(null);
   const [error, setError] = useState(null);
@@ -50,7 +50,7 @@ export default function Room() {
       api.get_files(Number(group_id))
         .then(response => {
           setGroupFiles(response.data.files);
-          console.log(response.data.files);
+          // console.log(response.data.files);
         })
         .catch(error => {
           setgroupListError(error.response?.data?.message || 'No files found');

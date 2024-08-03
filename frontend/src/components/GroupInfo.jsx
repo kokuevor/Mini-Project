@@ -3,7 +3,7 @@ import { api } from '../utils/api';
 import './GroupInfo.css';
 import { useParams } from 'react-router-dom';
 
-function GroupInfo({ members, files }) {
+function GroupInfo({ members, files = [] }) {
 
   const { group_id } = useParams();
 
@@ -40,12 +40,16 @@ function GroupInfo({ members, files }) {
           </div>
           <hr />
           <ul>
-            {files.map((file, index) => (
-              <li key={index}>
-                <span>{file}</span>
-                <button className="download-btn" onClick={() => handleDownload(file)}>Download</button>
-              </li>
-            ))}
+            {files.length > 0 ? (
+              files.map((file, index) => (
+                <li key={index}>
+                  <span>{file}</span>
+                  <button className="download-btn" onClick={() => handleDownload(file)}>Download</button>
+                </li>
+              ))
+            ) : (
+              <li>No files available</li>
+            )}
           </ul>
         </div>
         <div className="group-members">
@@ -78,7 +82,7 @@ GroupInfo.propTypes = {
   ).isRequired,
   files: PropTypes.arrayOf(
     PropTypes.string
-  ).isRequired,
+  ),
 };
 
 export default GroupInfo;

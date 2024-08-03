@@ -6,7 +6,7 @@ import './ChatArea.css';
 
 function ChatArea({ groupName, error }) {
 
-  const user_id = localStorage.getItem('user_id');
+  const user_id = sessionStorage.getItem('user_id');
   const { group_id } = useParams();
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');

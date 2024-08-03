@@ -86,6 +86,9 @@ def list_files(group_id):
         prefix = f"{group_id}/"
         response = s3.list_objects_v2(Bucket=BUCKET_NAME, Prefix=prefix)
         files = [obj["Key"].split("/", 1)[1] for obj in response.get("Contents", [])]
+        if len(files) == 0:
+            return jsonify({"message": "No files in the group"}), 200
+
         return jsonify({"files": files}), 200
     except ClientError as e:
         return jsonify({"error": str(e)}), 500

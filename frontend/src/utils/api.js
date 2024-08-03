@@ -8,7 +8,10 @@ export const api = {
 
     // User login
     login: (data) => axios.post(`${API_BASE_URL}/auth/login`, data),
-
+    
+    // User logout
+    logout: () => axios.post(`${API_BASE_URL}/auth/logout`),
+    
     // Get groups
     get_groups: () => axios.get(`${API_BASE_URL}/groups`),
 
