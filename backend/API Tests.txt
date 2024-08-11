@@ -75,3 +75,23 @@ i) Log Call:
     "call_type": "video",
     "start_time": "2023-07-20T14:30:00"
 }
+
+j) Sockets:
+ (1)To join a room:
+  {
+    "event": "join",
+    "data": {
+      "username": "postman_user",
+      "room": "1"
+    }
+  }
+
+ (2)To send a message:
+  {
+    "event": "message",
+    "data": {
+      "username": "postman_user",
+      "room": "1",
+      "message": "Hello from Postman!"
+    }
+  }
