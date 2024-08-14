@@ -1,13 +1,12 @@
 from flask import Blueprint, request, jsonify
 from models.models import User, Group, UserGroup, Invitations
-from create_app import db
+from create_app import db, socketio
 from sqlalchemy.exc import IntegrityError
 
 import string
 import random
 
 bp = Blueprint("groups", __name__, url_prefix="/api/groups")
-
 
 @bp.route("/", methods=["POST"])
 def create_group():
@@ -82,6 +81,11 @@ def join_group(group_id):
         new_member = UserGroup(user_id=user_id, group_id=group_id)
         db.session.add(new_member)
         db.session.commit()
+        socketio.emit(
+            "join",
+            {"username": user.username, "room": f"group_{group_id}"},
+            room=request.sid,
+        )
         return jsonify({"message": "Joined group successfully"}), 200
     except IntegrityError:
         db.session.rollback()
@@ -113,6 +117,11 @@ def join_group_with_invite():
         new_member = UserGroup(user_id=user_id, group_id=group_id)
         db.session.add(new_member)
         db.session.commit()
+        socketio.emit(
+            "join",
+            {"username": user.username, "room": f"group_{group_id}"},
+            room=request.sid,
+        )
         return jsonify({"message": "Joined group successfully"}), 200
     except IntegrityError:
         db.session.rollback()

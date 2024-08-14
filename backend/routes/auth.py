@@ -13,7 +13,6 @@ load_dotenv()
 bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-
 @bp.route("/register", methods=["POST"])
 def register():
     data = request.json
@@ -43,7 +42,7 @@ def login():
         )
         return response, 200
     return jsonify({"message": "Invalid credentials"}), 401
-
+    
 
 @bp.route("/logout", methods=["POST"])
 def logout():

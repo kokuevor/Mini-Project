@@ -18,6 +18,7 @@ export function Login({ handleClick }) {
 
             sessionStorage.setItem('user_id', user_id);
             sessionStorage.setItem('authToken', authToken);
+            localStorage.setItem('username', username);
 
             console.log('Login successful');
             window.location.href = '/home';
@@ -31,7 +32,7 @@ export function Login({ handleClick }) {
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="username">Email</label>
+                    <label htmlFor="username">Username</label>
                     <input
                         type="text"
                         id="username"

@@ -6,12 +6,18 @@ export const api = {
     // User registration
     register: (data) => axios.post(`${API_BASE_URL}/auth/register`, data),
 
+    // Get Messages
+    get_messages: (groupId) => axios.get(`${API_BASE_URL}/chat/${groupId}/messages`),
+
+    // Get Messages
+    send_message: (groupId, data) => axios.post(`${API_BASE_URL}/chat/${groupId}/messages`, data),
+
     // User login
     login: (data) => axios.post(`${API_BASE_URL}/auth/login`, data),
-    
+
     // User logout
     logout: () => axios.post(`${API_BASE_URL}/auth/logout`),
-    
+
     // Get groups
     get_groups: () => axios.get(`${API_BASE_URL}/groups`),
 
@@ -32,9 +38,6 @@ export const api = {
 
     // Join group
     join_group_by_invite: (data) => axios.post(`${API_BASE_URL}/groups/join`, data),
-
-    // Send message
-    send_message: (groupId, data) => axios.post(`${API_BASE_URL}/groups/${groupId}/messages`, data),
 
     // Create task
     create_task: (groupId, data) => axios.post(`${API_BASE_URL}/groups/${groupId}/tasks`, data),

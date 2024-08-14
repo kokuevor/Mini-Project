@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cometchat-pro/chat": "^3.0.13",
+    "@cometchat/chat-sdk-javascript": "^4.0.9",
     "@excalidraw/excalidraw": "^0.17.6",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
@@ -25,7 +27,10 @@
     "react-chat-engine": "^1.11.28",
     "react-dom": "^18.3.1",
     "react-google-button": "^0.8.0",
-    "react-router-dom": "^6.26.0"
+    "react-router-dom": "^6.26.0",
+    "socket.io-client": "^4.7.5",
+    "stream-chat": "^8.37.0",
+    "stream-chat-react": "^11.23.5"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

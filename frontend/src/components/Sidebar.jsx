@@ -20,6 +20,7 @@ const Sidebar = ({ activeItem }) => {
 
             sessionStorage.removeItem('user_id')
             sessionStorage.removeItem('authToken')
+            localStorage.removeItem('username')
             console.log('Logout successful');
             window.location.href = '/get-started';
         } catch (err) {
@@ -28,7 +29,7 @@ const Sidebar = ({ activeItem }) => {
     };
 
     const logoutPrompt = () => {
-        if (window.confirm("Do you really want to leave?")) {
+        if (window.confirm("Do you really want to logout?")) {
             handleLogout();
         }
     }

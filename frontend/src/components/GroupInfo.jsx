@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 function GroupInfo({ members, files = [] }) {
 
   const { group_id } = useParams();
+  const user_id = sessionStorage.getItem('user_id');
 
   const handleDownload = (fileName) => {
     api.download_file(group_id, fileName)
@@ -24,12 +25,29 @@ function GroupInfo({ members, files = [] }) {
   };
 
 
+  const leaveGroup = async () => {
+    try {
+      await api.leave_group(user_id, group_id);
+
+      alert('Group Exit successful');
+      window.location.href = '/my-rooms';
+    } catch (err) {
+      alert(err.response?.data?.message || 'An error occurred');
+    }
+  };
+
+  const leaveGroupPrompt = () => {
+    if (window.confirm("Do you really want to exit group?")) {
+      leaveGroup();
+    }
+  }
+
   return (
     <div className="group-info-area">
       <div className="group-info-header">
         <h2>Group Info</h2>
         <div className="group-info-actions">
-          <button className="exit-group">EXIT GROUP</button>
+          <button className="exit-group" onClick={leaveGroupPrompt}>EXIT GROUP</button>
         </div>
       </div>
       <div className="group-info-main">

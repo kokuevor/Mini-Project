@@ -170,7 +170,7 @@ body {
   .group-info {
     width: 100%;
     border: none;
-    max-height: 300px;
+    max-height: 100vh;
   }
 
   .chat-area {
