@@ -84,7 +84,7 @@ def join_group(group_id):
         socketio.emit(
             "join",
             {"username": user.username, "room": f"group_{group_id}"},
-            room=request.sid,
+            room=f"group_{group_id}",
         )
         return jsonify({"message": "Joined group successfully"}), 200
     except IntegrityError:
