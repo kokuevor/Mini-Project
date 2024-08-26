@@ -36,12 +36,12 @@ pip install -r requirements.txt
 1. **Database Configuration**:
    - Open `.env` and update the following fields with your Database Uri credentials:
      ```python
-  	  DATABASE_URI=""
-  	  SECRET_KEY=""
-	    AWS_ACCESS_KEY_ID=""
-	    AWS_SECRET_ACCESS_KEY=""
-	    AWS_DEFAULT_REGION=""
-	    BUCKET_NAME=""
+     	DATABASE_URI=""
+     	SECRET_KEY=""
+	AWS_ACCESS_KEY_ID=""
+	AWS_SECRET_ACCESS_KEY=""
+	AWS_DEFAULT_REGION=""
+	BUCKET_NAME=""
      ```
 
 ### AWS S3 Setup
