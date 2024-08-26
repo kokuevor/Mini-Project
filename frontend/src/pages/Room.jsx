@@ -53,7 +53,7 @@ export default function Room() {
           // console.log(response.data.files);
         })
         .catch(error => {
-          setgroupListError(error.response?.data?.message || 'No files found');
+          setgroupListError(error.response?.data?.message || 'No groups found');
         });
     }
   }, [user_id, group_id]);
