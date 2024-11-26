@@ -91,6 +91,10 @@
     text-decoration: none;
 }
 
+.error-message {
+    color: #ff0000;
+}
+
 @media (max-width: 768px) {
     .content {
         flex-direction: column;
