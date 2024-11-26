@@ -16,7 +16,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     db.init_app(app)
-    socketio.init_app(app, cors_allowed_origins="*")
+    socketio.init_app(app, cors_allowed_origins=["http://localhost:5173", "https://studypaddies.vercel.app"])
 
     # app.secret_key = os.getenv("SECRET_KEY")
 
