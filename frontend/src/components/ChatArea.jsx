@@ -28,7 +28,7 @@ function ChatArea({ groupName, error }) {
     fetchMessages();
 
     // Set up Socket.IO connection
-    socketRef.current = io('https://mini-project-cco8.onrender.com');
+    socketRef.current = io('https://mini-project-cco8.onrender.com/api');
     socketRef.current.on('connect', () => {
       socketRef.current.emit('join', { username: sessionStorage.getItem('username'), room: `group_${group_id}` });
     });
