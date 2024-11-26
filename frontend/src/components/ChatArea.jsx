@@ -167,10 +167,20 @@ function ChatArea({ groupName, error }) {
   useEffect(() => {
     fetchMessages();
 
-    socketRef.current = io('https://mini-project-cco8.onrender.com', {
+    const socket = io('https://mini-project-cco8.onrender.com', {
       transports: ['websocket'],
-      reconnection: true,
+      reconnection: true,  // Enable reconnection attempts
+      reconnectionAttempts: 5,  // Number of reconnection attempts before giving up
+      reconnectionDelay: 1000,  // Delay between reconnections in ms
+      debug: true  // Enable debug mode for more verbose logs
     });
+
+    socketRef.current = socket;
+
+    // socketRef.current = io('https://mini-project-cco8.onrender.com', {
+    //   transports: ['websocket'],
+    //   reconnection: true,
+    // });
 
     socketRef.current.on('connect', () => {
       socketRef.current.emit('join', { username: sessionStorage.getItem('username'), room: `group_${group_id}` });
