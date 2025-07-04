@@ -21,7 +21,7 @@ def create_app():
     # app.secret_key = os.getenv("SECRET_KEY")
 
     # CORS(app)
-    CORS(app, resources={r"*": {"origins": ["http://localhost:5173", "https://studypaddies.vercel.app"]}})
+    CORS(app, resources={r"*": {"origins": ["*"]}})
 
     with app.app_context():
         from models.models import (
