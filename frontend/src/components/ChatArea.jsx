@@ -154,6 +154,7 @@ function ChatArea({ groupName, error }) {
   const [uploadStatus, setUploadStatus] = useState('');
   const [socketError, setSocketError] = useState('');
   const socketRef = useRef();
+  const SOCKET_URL = process.env.REACT_APP_API_URL || "http://localhost:5000"
 
   const fetchMessages = async () => {
     try {
@@ -167,7 +168,7 @@ function ChatArea({ groupName, error }) {
   useEffect(() => {
     fetchMessages();
 
-    const socket = io('https://mini-project-cco8.onrender.com', {
+    const socket = io(SOCKET_URL, {
       transports: ['websocket'],
       reconnection: true,  // Enable reconnection attempts
       reconnectionAttempts: 5,  // Number of reconnection attempts before giving up
@@ -219,7 +220,7 @@ function ChatArea({ groupName, error }) {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    
+
     if (file) {
       if (file.size > 10 * 1024 * 1024) {
         setUploadStatus('File is too large. Maximum allowed size is 10MB.');

@@ -47,7 +47,7 @@ const MainContentComponent = () => (
 
 const FeaturesComponent = () => (
     <div id='features'>
-        <div className="section-header">FEATURES</div>
+        <div className="section-header-2">FEATURES</div>
         <section className="features-section">
             <FeatureCard
                 className="card-1"
