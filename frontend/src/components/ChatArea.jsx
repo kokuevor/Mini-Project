@@ -6,7 +6,7 @@
 // import './ChatArea.css';
 
 // function ChatArea({ groupName, error }) {
-//   const user_id = sessionStorage.getItem('user_id');
+//   const user_id = localStorage.getItem('user_id');
 //   const { group_id } = useParams();
 //   const [messages, setMessages] = useState([]);
 //   const [newMessage, setNewMessage] = useState('');
@@ -30,7 +30,7 @@
 //     // Set up Socket.IO connection
 //     socketRef.current = io('https://mini-project-cco8.onrender.com/api');
 //     socketRef.current.on('connect', () => {
-//       socketRef.current.emit('join', { username: sessionStorage.getItem('username'), room: `group_${group_id}` });
+//       socketRef.current.emit('join', { username: localStorage.getItem('username'), room: `group_${group_id}` });
 //     });
 
 //     socketRef.current.on('new_message', (message) => {
@@ -38,7 +38,7 @@
 //     });
 
 //     return () => {
-//       socketRef.current.emit('leave', { username: sessionStorage.getItem('username'), room: `group_${group_id}` });
+//       socketRef.current.emit('leave', { username: localStorage.getItem('username'), room: `group_${group_id}` });
 //       socketRef.current.disconnect();
 //     };
 //   }, [fetchMessages, group_id]);
@@ -146,7 +146,7 @@ import { useParams } from 'react-router-dom';
 import './ChatArea.css';
 
 function ChatArea({ groupName, error }) {
-  const user_id = sessionStorage.getItem('user_id');
+  const user_id = localStorage.getItem('user_id');
   const { group_id } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -184,7 +184,7 @@ function ChatArea({ groupName, error }) {
     // });
 
     socketRef.current.on('connect', () => {
-      socketRef.current.emit('join', { username: sessionStorage.getItem('username'), room: `group_${group_id}` });
+      socketRef.current.emit('join', { username: localStorage.getItem('username'), room: `group_${group_id}` });
     });
 
     socketRef.current.on('new_message', (message) => {
@@ -202,7 +202,7 @@ function ChatArea({ groupName, error }) {
     });
 
     return () => {
-      socketRef.current.emit('leave', { username: sessionStorage.getItem('username'), room: `group_${group_id}` });
+      socketRef.current.emit('leave', { username: localStorage.getItem('username'), room: `group_${group_id}` });
       socketRef.current.disconnect();
     };
   }, [group_id]);

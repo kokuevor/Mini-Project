@@ -58,7 +58,7 @@ SubjectTag.propTypes = {
 
 // GroupCard Component
 const GroupCard = ({ name, description, group_id }) => {
-    const user_id = sessionStorage.getItem('user_id');
+    const user_id = localStorage.getItem('user_id');
     const navigate = useNavigate();
 
     const joinGroup = async () => {

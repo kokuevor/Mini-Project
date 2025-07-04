@@ -18,8 +18,8 @@ const Sidebar = ({ activeItem }) => {
         try {
             await api.logout();
 
-            sessionStorage.removeItem('user_id')
-            sessionStorage.removeItem('authToken')
+            localStorage.removeItem('user_id')
+            localStorage.removeItem('authToken')
             localStorage.removeItem('username')
             console.log('Logout successful');
             window.location.href = '/get-started';

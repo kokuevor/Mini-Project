@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 function GroupInfo({ members, files = [] }) {
 
   const { group_id } = useParams();
-  const user_id = sessionStorage.getItem('user_id');
+  const user_id = localStorage.getItem('user_id');
 
   const handleDownload = (fileName) => {
     api.download_file(group_id, fileName)

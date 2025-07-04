@@ -95,7 +95,7 @@ const MainContent = () => {
     const [privateRooms, setPrivateRooms] = useState([]);
     const [error, setError] = useState(null);
 
-    const user_id = sessionStorage.getItem('user_id');
+    const user_id = localStorage.getItem('user_id');
 
     useEffect(() => {
         if (user_id) {
