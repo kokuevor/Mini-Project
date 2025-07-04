@@ -8,8 +8,8 @@ import Room from './pages/Room';
 import BoardPage from './pages/BoardPage'
 
 function App() {
-  const user_id = sessionStorage.getItem('user_id');
-  const authToken = sessionStorage.getItem('authToken');
+  const user_id = localStorage.getItem('user_id');
+  const authToken = localStorage.getItem('authToken');
 
   return (
     <BrowserRouter>

@@ -16,8 +16,8 @@ export function Login({ handleClick }) {
             const response = await api.login({ username, password });
             const { authToken, user_id } = response.data;
 
-            sessionStorage.setItem('user_id', user_id);
-            sessionStorage.setItem('authToken', authToken);
+            localStorage.setItem('user_id', user_id);
+            localStorage.setItem('authToken', authToken);
             localStorage.setItem('username', username);
 
             console.log('Login successful');
