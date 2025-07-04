@@ -80,6 +80,9 @@
 .section-header {
     padding-top: 12px;
     text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     font-weight: 600;
     font-size: 30px;
 }
