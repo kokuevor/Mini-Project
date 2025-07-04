@@ -154,7 +154,7 @@ function ChatArea({ groupName, error }) {
   const [uploadStatus, setUploadStatus] = useState('');
   const [socketError, setSocketError] = useState('');
   const socketRef = useRef();
-  const SOCKET_URL = process.env.REACT_APP_API_URL || "http://localhost:5000"
+  const SOCKET_URL = process.env.API_BASE_URL || "http://localhost:5000"
 
   const fetchMessages = async () => {
     try {
